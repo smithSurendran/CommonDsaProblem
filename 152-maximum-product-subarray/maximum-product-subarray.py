@@ -7,13 +7,14 @@ class Solution:
         curr_min= nums[0]
         result= nums[0]
 
-        for i in range(1,len(nums)):
-            num= nums[i]
-
-            if num<0:
+        for i in range(1, len(nums)):
+            if nums[i]<0:
                 curr_min, curr_max= curr_max, curr_min
-            curr_max= max(num, curr_max*num)
-            curr_min= min(num, curr_min*num)
+            curr_max= max(nums[i], curr_max*nums[i])
+            curr_min= min(nums[i], curr_min*nums[i])
 
-            result= max(curr_max, result)
+            result= max(result,curr_max)
+
+
+            
         return result        
