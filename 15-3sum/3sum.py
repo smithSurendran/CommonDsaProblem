@@ -5,26 +5,28 @@ class Solution:
         for i in range(len(nums)):
             if i>0 and nums[i]==nums[i-1]:
                 continue
-            left= i+1
-            right=len(nums)-1
-            
-            while left<right:
-                temp=[]
-                total=nums[i]+nums[left]+nums[right]
+            start=i+1
+            end= len(nums)-1
+            while start<end:
+                total= nums[i]+nums[start]+nums[end]
+                if total==0:
+                    result.append([nums[i], nums[start], nums[end]])
 
-                if total<0:
-                    left+=1
-                elif total>0:
-                    right-=1
+                    while start<end and nums[start]==nums[start+1]:
+                        start+=1
+                    while start<end and nums[end]==nums[end-1]:
+                        end-=1
+                    start+=1
+                    end-=1
+
+                elif total< 0:
+                    start+=1
                 else:
-                    result.append([nums[i], nums[left], nums[right]])
-                    
-                    while left<right and nums[left]==nums[left+1]:
-                        left+=1
-                    while left<right and nums[right]==nums[right-1]:
-                        right-=1
-                    left+=1
-                    right-=1
+                    end-=1
 
-        return result
+
         
+        return result
+       
+        
+
