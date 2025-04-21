@@ -8,36 +8,34 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
-        def reverseList(node):
+        slow= fast= head
+        while fast and fast.next:
+            slow= slow.next
+            fast= fast.next.next
+        mid= slow
+
+        def rev(node):
             if node is None or node.next is None:
                 return node
-            
-            new_head= reverseList(node.next)
+            new_head= rev(node.next)
 
             node.next.next= node
             node.next= None
 
             return new_head
         
-        fast=slow=curr=head
+        second= rev(mid)
+        first= head
+        while second.next:
+            temp = first.next
+            first.next=second
+            first= temp
 
-        while fast and fast.next:
-            slow= slow.next
-            fast= fast.next.next
-        rev_lst= reverseList(slow)
-        merge= ListNode(-1)
-        dummy= merge
-        
-        while rev_lst.next:
-            temp= curr.next
-            curr.next=rev_lst
-            curr= temp
+            temp=second.next
+            second.next= first
+            second=temp
 
-            temp= rev_lst.next
-            rev_lst.next=curr
-            rev_lst=temp
+        return head
+             
 
-        print(merge)
-
-    
         
