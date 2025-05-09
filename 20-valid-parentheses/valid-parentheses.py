@@ -2,15 +2,16 @@ class Solution:
     def isValid(self, s: str) -> bool:
         
         stack=[]
-        map={')':'(', '}':'{',']':'['}
+        mapped={')':'(', ']':'[', '}':'{'}
 
-        for c in s:
-            if c in map.values():
-                stack.append(c)
-            if c in map:
-                if not stack or stack[-1]!=map[c]:
+        for vp in s:
+            if vp in mapped:
+                if stack and stack[-1]==mapped[vp]:
+                    stack.pop()
+                else:
                     return False
-                stack.pop()
+            else:
+                stack.append(vp)
         return not stack
 
                     
