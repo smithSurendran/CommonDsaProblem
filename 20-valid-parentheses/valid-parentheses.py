@@ -1,20 +1,14 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        
+        brackets={'}':'{',']':'[',')':'('}
+
         stack=[]
-        mapped={')':'(', ']':'[', '}':'{'}
-
-        for vp in s:
-            if vp in mapped:
-                if stack and stack[-1]==mapped[vp]:
-                    stack.pop()
-                else:
-                    return False
+        for i in range(len(s)):
+            if stack and brackets.get(s[i])==stack[-1]:
+                stack.pop()
             else:
-                stack.append(vp)
-        return not stack
-
-                    
-
-
+                stack.append(s[i])
             
+        if stack:
+            return False
+        return True
