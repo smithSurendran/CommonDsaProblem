@@ -6,15 +6,17 @@
 import heapq
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        heap=[]
-        for node in lists:
-            while node:
-                heapq.heappush(heap, node.val)
-                node= node.next
-        
-        dummy=ListNode(-1)
-        merge= dummy
-        while heap:
-            merge.next=ListNode(heapq.heappop(heap))
-            merge= merge.next
-        return dummy.next 
+        result=[]
+        for li in lists:
+            while li:
+                result.append(li.val)
+                li= li.next
+        print(result)
+        result= sorted(result)
+        dummy= ListNode()
+        current= dummy
+        for num in result:
+            current.next=ListNode(num)
+            current= current.next
+        return dummy.next
+
